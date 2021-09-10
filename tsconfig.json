@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "lib": [
+      "ES2020"
+    ],
+    "module": "CommonJS",
+    "declaration": true,
+    "outDir": "./dist",
+    "strict": false,
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+  },
+  "include": [
+    "src",
+    "__tests__",
+    "examples"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
