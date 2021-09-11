@@ -1,25 +1,50 @@
 import { session } from 'grammy';
-import { getConnection, getRepository } from 'typeorm';
-import { TypeormAdapter } from '../src';
+import { Column, createConnection, Entity, getConnection, getRepository, ObjectID, ObjectIdColumn } from 'typeorm';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+
+import { ISession, TypeormAdapter } from '../src';
 
 import { createBot } from './helpers/createBot';
-import createDbConnection, { Session } from './helpers/createDbConnection';
 import { createMessage } from './helpers/createMessage';
 
+@Entity()
+export class Session implements ISession {
+  @ObjectIdColumn()
+  id: ObjectID;
 
-export type SessionData = {
+  @Column()
+  key: string;
+
+  @Column()
+  value: string;
+}
+
+export interface SessionData {
   pizzaCount: number;
 }
 
+let mongod: MongoMemoryServer;
+
 beforeAll(async () => {
-  await createDbConnection();
+  mongod = await MongoMemoryServer.create();
+
+  await createConnection({
+    type: 'mongodb',
+    url: mongod.getUri(),
+    entities: [Session],
+  });
 });
 
-test('bot should be created', () => {
+afterAll(() => {
+  mongod.stop();
+  getConnection().close();
+});
+
+test('Bot should be created', () => {
   expect(createBot()).not.toBeFalsy();
 });
 
-test('Typeorm connection test', async () => {
+test('Typeorm is connected and mocked successfuly', async () => {
   expect(getConnection().isConnected).toBe(true);
 
   const key = 'TEST KEY';
@@ -65,10 +90,7 @@ describe('Pizza counter test', () => {
       expect(ctx.session.pizzaCount).toEqual(1);
     });
     
-    const firstMessage = createMessage(bot, 'first');
-    const secondMessage = createMessage(bot, 'second');
-
-    await bot.handleUpdate(firstMessage.update);
-    await bot.handleUpdate(secondMessage.update);
+    await bot.handleUpdate(createMessage(bot, 'first').update);
+    await bot.handleUpdate(createMessage(bot, 'second').update);
   });
 });

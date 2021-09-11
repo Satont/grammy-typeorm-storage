@@ -26,7 +26,7 @@ describe('Test string session', () => {
       initial() {
         return 'test';
       },
-      storage: new TypeormAdapter({ repisotory: getRepository(Session) }),
+      storage: new TypeormAdapter({ repository: getRepository(Session) }),
     }));
 
     await bot.handleUpdate(ctx.update);
@@ -43,7 +43,7 @@ describe('Test string session', () => {
       initial() {
         return 'test';
       },
-      storage: new TypeormAdapter({ repisotory: getRepository(Session) }),
+      storage: new TypeormAdapter({ repository: getRepository(Session) }),
     }));
 
     

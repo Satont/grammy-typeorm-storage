@@ -7,12 +7,13 @@ export * from './types/session';
 export class TypeormAdapter<T> implements StorageAdapter<T> {
   private repository: Repository<ISession>
   
-  constructor(opts: { repisotory: Repository<ISession>}) {
-    this.repository = opts.repisotory;
+  constructor(opts: { repository: Repository<ISession> }) {
+    this.repository = opts.repository;
   }
 
   async read(key: string) {
     const session = await this.repository.findOne({ key });
+
     if (session === null || session === undefined) {
       return undefined;
     }
@@ -20,10 +21,10 @@ export class TypeormAdapter<T> implements StorageAdapter<T> {
   }
 
   async write(key: string, data: T) {
-    const session = await this.repository.findOne({ key });
+    const session = await this.repository.findOne({ key }, { select: ['key'] });
     const value = JSON.stringify(data);
 
-    if (session) {
+    if (session !== null && session !== undefined) {
       await this.repository.update({ key }, { value });
     } else {
       await this.repository.save({ key, value });
