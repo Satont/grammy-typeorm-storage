@@ -4,8 +4,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 
 import { ISession, TypeormAdapter } from '../src';
 
-import { createBot } from './helpers/createBot';
-import { createMessage } from './helpers/createMessage';
+import { createBot, createMessage } from '@satont/grammy-storage-utils';
 
 @Entity()
 export class Session implements ISession {
@@ -17,10 +16,6 @@ export class Session implements ISession {
 
   @Column()
   value: string;
-}
-
-export interface SessionData {
-  pizzaCount: number;
 }
 
 let mongod: MongoMemoryServer;
@@ -57,7 +52,7 @@ test('Typeorm is connected and mocked successfuly', async () => {
 
 describe('Pizza counter test', () => {
   test('Pizza counter should be equals 0 on initial', async () => {
-    const bot = createBot<SessionData>();
+    const bot = createBot();
     const ctx = createMessage(bot);
 
     bot.use(session({
@@ -75,7 +70,7 @@ describe('Pizza counter test', () => {
   });
 
   test('Pizza counter should be equals 1 after first message', async () => {
-    const bot = createBot<SessionData>();
+    const bot = createBot();
 
     bot.use(session({
       initial: () => ({ pizzaCount: 0 }),

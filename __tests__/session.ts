@@ -2,14 +2,10 @@ import { session } from 'grammy';
 import { getConnection, getRepository } from 'typeorm';
 import { TypeormAdapter } from '../src';
 
-import { createBot } from './helpers/createBot';
+
 import createDbConnection, { Session } from './helpers/createDbConnection';
-import { createMessage } from './helpers/createMessage';
+import { createBot, createMessage } from '@satont/grammy-storage-utils';
 
-
-export type SessionData = {
-  pizzaCount: number;
-}
 
 beforeAll(async () => {
   await createDbConnection();
@@ -32,7 +28,7 @@ test('Typeorm connection test', async () => {
 
 describe('Pizza counter test', () => {
   test('Pizza counter should be equals 0 on initial', async () => {
-    const bot = createBot<SessionData>();
+    const bot = createBot();
     const ctx = createMessage(bot);
 
     bot.use(session({
@@ -50,7 +46,7 @@ describe('Pizza counter test', () => {
   });
 
   test('Pizza counter should be equals 1 after first message', async () => {
-    const bot = createBot<SessionData>();
+    const bot = createBot();
 
     bot.use(session({
       initial: () => ({ pizzaCount: 0 }),

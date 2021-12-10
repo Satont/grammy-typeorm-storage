@@ -2,9 +2,8 @@ import { session } from 'grammy';
 import { getConnection, getRepository } from 'typeorm';
 import { TypeormAdapter } from '../src';
 
-import { createBot } from './helpers/createBot';
 import createDbConnection, { Session } from './helpers/createDbConnection';
-import { createMessage } from './helpers/createMessage';
+import { createBot, createMessage } from '@satont/grammy-storage-utils';
 
 beforeAll(async () => {
   await createDbConnection();
@@ -20,7 +19,7 @@ test('Typeorm connection test', async () => {
 
 describe('Test string session', () => {
   test('Initial session state should equals "test"', async () => {
-    const bot = createBot<string>();
+    const bot = createBot(false);
     const ctx = createMessage(bot);
     bot.use(session({
       initial() {
@@ -37,7 +36,7 @@ describe('Test string session', () => {
   });
 
   test('Session state should be changed to "testqwe" after message', async () => {
-    const bot = createBot<string>();
+    const bot = createBot(false);
 
     bot.use(session({
       initial() {
