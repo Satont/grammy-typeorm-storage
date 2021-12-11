@@ -41,7 +41,7 @@
     "grammy": "^1.5.2",
     "jest": "^27.1.0",
     "mongodb": "^3.7.3",
-    "mongodb-memory-server": "^7.4.0",
+    "mongodb-memory-server": "^7.6.3",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
