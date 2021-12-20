@@ -38,7 +38,7 @@
     "@typescript-eslint/parser": "^4.33.0",
     "better-sqlite3": "^7.4.5",
     "eslint": "^7.23.0",
-    "grammy": "^1.5.2",
+    "grammy": "^1.5.4",
     "jest": "^27.4.5",
     "mongodb": "^3.7.3",
     "mongodb-memory-server": "^7.6.3",
