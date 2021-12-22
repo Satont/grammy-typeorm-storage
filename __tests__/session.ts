@@ -1,7 +1,7 @@
 import { session } from 'grammy';
 import { getConnection, getRepository } from 'typeorm';
 import { TypeormAdapter } from '../src';
-import { beforeAll, afterAll, test, expect, describe } from 'vitest';
+import { beforeAll, test, expect, describe } from 'vitest';
 
 import createDbConnection, { Session } from './helpers/createDbConnection';
 import { createBot, createMessage } from '@satont/grammy-storage-utils';

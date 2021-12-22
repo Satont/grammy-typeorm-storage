@@ -13,10 +13,10 @@ export class Session implements ISession {
   @ObjectIdColumn()
   id: ObjectID;
 
-  @Column()
+  @Column({ type: 'string' })
   key: string;
 
-  @Column()
+  @Column({ type: 'string' })
   value: string;
 }
 
