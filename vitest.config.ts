@@ -6,4 +6,4 @@ export default defineConfig({
     exclude: ['__tests__/helpers'],
     watch: false
   },
-}) 
+})
