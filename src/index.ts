@@ -5,7 +5,7 @@ import { ISession } from './types/session';
 export * from './types/session';
 
 export class TypeormAdapter<T> implements StorageAdapter<T> {
-  private repository: Repository<ISession>
+  private repository: Repository<ISession>;
   
   constructor(opts: { repository: Repository<ISession> }) {
     this.repository = opts.repository;

@@ -1,3 +1,5 @@
+import { beforeAll, test, expect, describe } from 'vitest';
+
 import { session } from 'grammy';
 import { getConnection, getRepository } from 'typeorm';
 import { TypeormAdapter } from '../src';

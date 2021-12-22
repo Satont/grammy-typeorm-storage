@@ -1,3 +1,5 @@
+import { beforeAll, afterAll, test, expect, describe } from 'vitest';
+
 import { session } from 'grammy';
 import { Column, createConnection, Entity, getConnection, getRepository, ObjectID, ObjectIdColumn } from 'typeorm';
 import { MongoMemoryServer } from 'mongodb-memory-server';
@@ -11,10 +13,10 @@ export class Session implements ISession {
   @ObjectIdColumn()
   id: ObjectID;
 
-  @Column()
+  @Column({ type: 'string' })
   key: string;
 
-  @Column()
+  @Column({ type: 'string' })
   value: string;
 }
 
