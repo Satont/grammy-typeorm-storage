@@ -1,3 +1,7 @@
+# ARCHIVED!!!
+
+I migrated all my storages to monorepo, check it out: https://github.com/Satont/grammy-storages
+
 # TypeORM storage adapter for grammY
 
 Storage adapter that can be used to [store your session data](https://grammy.dev/plugins/session.html) with [TypeORM](https://typeorm.io/) when using sessions.
